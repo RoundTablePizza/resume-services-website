@@ -59,11 +59,12 @@
         let loadingIndicator = document.getElementById('loadingIndicator');
 
         if (option === 1) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/score_resume';
+            apiEndpoint = 'https://your-replit-url/score_resume';
         } else if (option === 2) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/tune_up_resume';
+            apiEndpoint = 'https://your-replit-url/tune_up_resume';
+            localStorage.setItem('uploadedResume', document.getElementById('resume').files[0]);
         } else if (option === 3) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/create_resume';
+            apiEndpoint = 'https://your-replit-url/create_resume';
         }
 
         try {
@@ -187,28 +188,12 @@
               <div class="icon"><i class="bi bi-brightness-high"></i></div>
               <h4 class="title"><a href="">Resume Tune-Up - $75</a></h4>
               <p class="description">Receive detailed feedback on each of your resume scores, including specific changes you should make, the reasons for those changes, and a keyword analysis to optimize your resume.</p>
-              <form id="resumeTuneUpForm" onsubmit="handleResumeUpload(event, 2)">
-                <input type="file" name="resume" accept=".pdf" required class="form-control mb-2">
-                <input type="email" name="email" placeholder="Your Email" required class="form-control mb-2">
-                <button type="submit" class="btn btn-primary">Upload Resume for Tune-Up</button>
-              </form>
-              <div id="responseMessage"></div>
             </div>
 
             <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
               <div class="icon"><i class="bi bi-calendar4-week"></i></div>
               <h4 class="title"><a href="">Resume Writer - $150</a></h4>
               <p class="description">Provide various elements about your professional background, and our expert writers will create a polished, professional resume for you.</p>
-              <form id="resumeWriterForm" onsubmit="handleResumeUpload(event, 3)">
-                <input type="email" id="email" name="email" placeholder="Your email" required class="form-control mb-2">
-                <textarea id="personal_info" name="personal_info" placeholder="Personal Information" required class="form-control mb-2"></textarea>
-                <textarea id="work_experience" name="work_experience" placeholder="Work Experience" required class="form-control mb-2"></textarea>
-                <textarea id="education" name="education" placeholder="Education" required class="form-control mb-2"></textarea>
-                <textarea id="skills" name="skills" placeholder="Skills" required class="form-control mb-2"></textarea>
-                <textarea id="additional_info" name="additional_info" placeholder="Additional Information" class="form-control mb-2"></textarea>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-              <div id="writerResponseMessage"></div>
             </div>
 
           </div>
@@ -458,4 +443,3 @@
 </body>
 
 </html>
-
