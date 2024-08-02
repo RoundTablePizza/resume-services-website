@@ -86,9 +86,11 @@
             if (option === 1) {
                 displayScore(result);
             } else if (option === 2) {
-                displayMessage(result.message, 'responseMessage');
+                // Redirect to payment page
+                window.location.href = 'payment.html?service=tuneup&email=' + encodeURIComponent(formData.get('email'));
             } else if (option === 3) {
-                displayMessage(result.message, 'writerResponseMessage');
+                // Redirect to payment page
+                window.location.href = 'payment.html?service=writing&email=' + encodeURIComponent(formData.get('email'));
             }
         } catch (error) {
             console.error("Error during fetch:", error);
@@ -183,14 +185,30 @@
 
             <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
               <div class="icon"><i class="bi bi-brightness-high"></i></div>
-              <h4 class="title"><a href="">Resume Tune-Up</a></h4>
+              <h4 class="title"><a href="">Resume Tune-Up - $75</a></h4>
               <p class="description">Receive detailed feedback on each of your resume scores, including specific changes you should make, the reasons for those changes, and a keyword analysis to optimize your resume.</p>
+              <form id="resumeTuneUpForm" onsubmit="handleResumeUpload(event, 2)">
+                <input type="file" name="resume" accept=".pdf" required class="form-control mb-2">
+                <input type="email" name="email" placeholder="Your Email" required class="form-control mb-2">
+                <button type="submit" class="btn btn-primary">Upload Resume for Tune-Up</button>
+              </form>
+              <div id="responseMessage"></div>
             </div>
 
             <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
               <div class="icon"><i class="bi bi-calendar4-week"></i></div>
-              <h4 class="title"><a href="">Resume Writer</a></h4>
+              <h4 class="title"><a href="">Resume Writer - $150</a></h4>
               <p class="description">Provide various elements about your professional background, and our expert writers will create a polished, professional resume for you.</p>
+              <form id="resumeWriterForm" onsubmit="handleResumeUpload(event, 3)">
+                <input type="email" id="email" name="email" placeholder="Your email" required class="form-control mb-2">
+                <textarea id="personal_info" name="personal_info" placeholder="Personal Information" required class="form-control mb-2"></textarea>
+                <textarea id="work_experience" name="work_experience" placeholder="Work Experience" required class="form-control mb-2"></textarea>
+                <textarea id="education" name="education" placeholder="Education" required class="form-control mb-2"></textarea>
+                <textarea id="skills" name="skills" placeholder="Skills" required class="form-control mb-2"></textarea>
+                <textarea id="additional_info" name="additional_info" placeholder="Additional Information" class="form-control mb-2"></textarea>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+              <div id="writerResponseMessage"></div>
             </div>
 
           </div>
@@ -230,7 +248,7 @@
           <div class="col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="200">
             <div class="box">
               <div class="icon"><i class="bi bi-card-checklist" style="color: #e9bf06;"></i></div>
-              <h4 class="title"><a href="">Resume Tune-Up</a></h4>
+              <h4 class="title"><a href="">Resume Tune-Up - $75</a></h4>
               <p class="description">Receive detailed feedback on each of your resume scores, including specific changes you should make, the reasons for those changes, and a keyword analysis to optimize your resume.</p>
               <form id="resumeTuneUpForm" onsubmit="handleResumeUpload(event, 2)">
                 <input type="file" name="resume" accept=".pdf" required class="form-control mb-2">
@@ -244,7 +262,7 @@
           <div class="col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="300">
             <div class="box">
               <div class="icon"><i class="bi bi-brightness-high" style="color: #d6ff22;"></i></div>
-              <h4 class="title"><a href="">Resume Writer</a></h4>
+              <h4 class="title"><a href="">Resume Writer - $150</a></h4>
               <p class="description">Provide various elements about your professional background, and our expert writers will create a polished, professional resume for you.</p>
               <form id="resumeWriterForm" onsubmit="handleResumeUpload(event, 3)">
                 <input type="email" id="email" name="email" placeholder="Your email" required class="form-control mb-2">
