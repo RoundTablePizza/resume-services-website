@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Artisan Resume Services - Elevate Your Career in Ministry and Service</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .loading {
             display: none;
@@ -19,11 +20,16 @@
             color: red;
             margin-top: 20px;
         }
+        .logo {
+            max-width: 150px;
+            margin: 20px auto;
+            display: block;
+        }
     </style>
     <script>
         async function handleResumeUpload(event, option) {
             event.preventDefault();
-            console.log("Form submission triggered");  // Debug log
+            console.log("Form submission triggered");
 
             const formData = new FormData(event.target);
             let apiEndpoint = '';
@@ -39,7 +45,7 @@
 
             try {
                 loadingIndicator.style.display = 'block';  // Show loading indicator
-                console.log(`Sending request to ${apiEndpoint}`);  // Debug log
+                console.log(`Sending request to ${apiEndpoint}`);
                 const response = await fetch(apiEndpoint, {
                     method: 'POST',
                     body: formData
@@ -52,7 +58,7 @@
                 }
 
                 const result = await response.json();
-                console.log("Response received:", result);  // Debug log
+                console.log("Response received:", result);
 
                 if (option === 1) {
                     displayScore(result);
@@ -62,7 +68,7 @@
                     displayMessage(result.message, 'writerResponseMessage');
                 }
             } catch (error) {
-                console.error("Error during fetch:", error);  // Debug log
+                console.error("Error during fetch:", error);
                 loadingIndicator.style.display = 'none';  // Hide loading indicator in case of error
             }
         }
@@ -83,17 +89,23 @@
     </script>
 </head>
 <body>
-    <nav class="container-fluid">
-        <ul>
-            <li><strong>Artisan Resume Services</strong></li>
-        </ul>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#" role="button">Contact</a></li>
-        </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Artisan Resume Services</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            </ul>
+        </div>
     </nav>
-    <main class="container">
+    <main class="container mt-5">
+        <div class="text-center">
+            <img src="https://via.placeholder.com/150" alt="Company Logo" class="logo">
+        </div>
         <div class="grid">
             <section>
                 <hgroup>
@@ -101,18 +113,14 @@
                     <h3>Artisan Resume Services</h3>
                 </hgroup>
                 <p>At Artisan Resume Services, we understand the unique needs of professionals in the church and non-profit sectors. Our specialized resume writing services are designed to help you present your skills and experience in the best light, ensuring you stand out in your job search.</p>
-                <figure>
-                    <img src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d" alt="Church and Non-Profit">
-                    <figcaption><a href="https://unsplash.com/photos/HYFaADmIN5Q" target="_blank">Photo by Unsplash</a></figcaption>
-                </figure>
                 <h3>Our Features</h3>
                 <h4>1. Resume Scoring</h4>
                 <p><em>What it is:</em> Upload a PDF version of your resume and receive a score for each major section, rated from 1-10.</p>
                 <p><em>Why it’s helpful:</em> Quickly identify how your resume measures up in key areas without detailed feedback.</p>
                 <p><em>Cost:</em> Free</p>
                 <form id="resumeForm" onsubmit="handleResumeUpload(event, 1)">
-                    <input type="file" id="resume" name="resume" accept=".pdf" required>
-                    <button type="submit">Upload Resume for Scoring</button>
+                    <input type="file" id="resume" name="resume" accept=".pdf" required class="form-control mb-2">
+                    <button type="submit" class="btn btn-primary">Upload Resume for Scoring</button>
                 </form>
                 <div id="loadingIndicator" class="loading">Loading...</div>
                 <div id="scores"></div>
@@ -122,9 +130,9 @@
                 <p><em>Why it’s helpful:</em> Understand exactly what improvements to make and why, enhancing your resume’s effectiveness.</p>
                 <p><em>Cost:</em> $75</p>
                 <form id="resumeTuneUpForm" onsubmit="handleResumeUpload(event, 2)">
-                    <input type="file" name="resume" accept=".pdf" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <button type="submit">Upload Resume for Tune-Up</button>
+                    <input type="file" name="resume" accept=".pdf" required class="form-control mb-2">
+                    <input type="email" name="email" placeholder="Your Email" required class="form-control mb-2">
+                    <button type="submit" class="btn btn-primary">Upload Resume for Tune-Up</button>
                 </form>
                 <div id="responseMessage"></div>
 
@@ -133,13 +141,13 @@
                 <p><em>Why it’s helpful:</em> Save time and get a professionally crafted resume tailored to your career goals, with 3-5 templates to choose from.</p>
                 <p><em>Cost:</em> $125</p>
                 <form id="resumeWriterForm" onsubmit="handleResumeUpload(event, 3)">
-                    <input type="email" id="email" name="email" placeholder="Your email" required>
-                    <textarea id="personal_info" name="personal_info" placeholder="Personal Information" required></textarea>
-                    <textarea id="work_experience" name="work_experience" placeholder="Work Experience" required></textarea>
-                    <textarea id="education" name="education" placeholder="Education" required></textarea>
-                    <textarea id="skills" name="skills" placeholder="Skills" required></textarea>
-                    <textarea id="additional_info" name="additional_info" placeholder="Additional Information"></textarea>
-                    <button type="submit">Submit</button>
+                    <input type="email" id="email" name="email" placeholder="Your email" required class="form-control mb-2">
+                    <textarea id="personal_info" name="personal_info" placeholder="Personal Information" required class="form-control mb-2"></textarea>
+                    <textarea id="work_experience" name="work_experience" placeholder="Work Experience" required class="form-control mb-2"></textarea>
+                    <textarea id="education" name="education" placeholder="Education" required class="form-control mb-2"></textarea>
+                    <textarea id="skills" name="skills" placeholder="Skills" required class="form-control mb-2"></textarea>
+                    <textarea id="additional_info" name="additional_info" placeholder="Additional Information" class="form-control mb-2"></textarea>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
                 <div id="writerResponseMessage"></div>
                 <div id="turnaroundTime">
@@ -163,16 +171,23 @@
                     <h3>For more information, please reach out to us at support@yourdomain.com or call +1-800-123-4567.</h3>
                 </hgroup>
                 <form class="grid">
-                    <input type="text" id="firstname" name="firstname" placeholder="First Name" aria-label="First Name" required />
-                    <input type="email" id="email" name="email" placeholder="Email" aria-label="Email" required />
-                    <button type="submit" onclick="event.preventDefault()">Subscribe</button>
+                    <input type="text" id="firstname" name="firstname" placeholder="First Name" aria-label="First Name" required class="form-control mb-2"/>
+                    <input type="email" id="email" name="email" placeholder="Email" aria-label="Email" required class="form-control mb-2"/>
+                    <button type="submit" onclick="event.preventDefault()" class="btn btn-primary">Subscribe</button>
                 </form>
             </article>
         </div>
     </section>
-    <footer class="container">
+    <footer class="container text-center mt-5">
         <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
     </footer>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
 </body>
 </html>
 
