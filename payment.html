@@ -67,8 +67,17 @@
         const formData = new FormData(event.target);
 
         // Simulate payment processing
-        setTimeout(() => {
+        setTimeout(async () => {
             alert('Payment successful!');
+            const service = new URLSearchParams(window.location.search).get('service');
+            const email = document.getElementById('email').value;
+            const resume = localStorage.getItem('uploadedResume');
+            if (service === 'tuneup') {
+                await fetch('https://your-replit-url/tune_up_resume', {
+                    method: 'POST',
+                    body: new FormData().append('resume', resume).append('email', email)
+                });
+            }
             window.location.href = 'confirmation.html';
         }, 1000);
     }
