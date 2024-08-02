@@ -15,7 +15,8 @@
         .score-low {
             color: red;
         }
-        .cta {
+        .cta-text {
+            color: red;
             margin-top: 20px;
         }
     </style>
@@ -73,7 +74,7 @@
                 let scoreClass = score <= 7 ? 'score-low' : '';
                 scoresDiv.innerHTML += `<p class="${scoreClass}"><strong>${category}:</strong> ${score}</p>`;
             }
-            scoresDiv.innerHTML += '<div class="cta"><p>Unlock your resume\'s full potential. Visit our <a href="#resumeTuneUp">Resume Tune-Up</a> service to understand your scores and discover how to enhance them.</p></div>';
+            scoresDiv.innerHTML += '<p class="cta-text">Unlock your resume\'s full potential. Visit <a href="#resumeTuneUp">Resume Tune-Up</a> to understand your score and learn how to enhance it.</p>';
         }
 
         function displayMessage(message, elementId) {
@@ -174,3 +175,4 @@
     </footer>
 </body>
 </html>
+
