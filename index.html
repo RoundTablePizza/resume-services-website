@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Artisan Resume Services - Elevate Your Career in Ministry and Service</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <script>
+        async function handleResumeUpload(event, option) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            let apiEndpoint = '';
+
+            if (option === 1) {
+                apiEndpoint = 'http://your-api-server/score_resume';
+            } else if (option === 2) {
+                apiEndpoint = 'http://your-api-server/tune_up_resume';
+            } else if (option === 3) {
+                apiEndpoint = 'http://your-api-server/create_resume';
+            }
+
+            const response = await fetch(apiEndpoint, {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (option === 1) {
+                displayScore(result);
+            } else if (option === 2) {
+                displayMessage(result.message, 'responseMessage');
+            } else if (option === 3) {
+                displayMessage(result.message, 'writerResponseMessage');
+            }
+        }
+
+        function displayScore(scores) {
+            let scoresDiv = document.getElementById('scores');
+            scoresDiv.innerHTML = '<h2>Resume Scores</h2>';
+            for (let [category, score] of Object.entries(scores)) {
+                scoresDiv.innerHTML += `<p><strong>${category}:</strong> ${score}</p>`;
+            }
+        }
+
+        function displayMessage(message, elementId) {
+            document.getElementById(elementId).innerText = message;
+        }
+    </script>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>Artisan Resume Services</strong></li>
+        </ul>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#" role="button">Contact</a></li>
+        </ul>
+    </nav>
+    <main class="container">
+        <div class="grid">
+            <section>
+                <hgroup>
+                    <h2>Elevate Your Career in Ministry and Service</h2>
+                    <h3>Artisan Resume Services</h3>
+                </hgroup>
+                <p>At Artisan Resume Services, we understand the unique needs of professionals in the church and non-profit sectors. Our specialized resume writing services are designed to help you present your skills and experience in the best light, ensuring you stand out in your job search.</p>
+                <figure>
+                    <img src="https://source.unsplash.com/600x400/?church,non-profit" alt="Church and Non-Profit">
+                    <figcaption><a href="https://unsplash.com/" target="_blank">Photo by Unsplash</a></figcaption>
+                </figure>
+                <h3>Our Features</h3>
+                <h4>1. Resume Scoring</h4>
+                <p><em>What it is:</em> Upload a PDF version of your resume and receive a score for each major section, rated from 1-10.</p>
+                <p><em>Why it’s helpful:</em> Quickly identify how your resume measures up in key areas without detailed feedback.</p>
+                <p><em>Cost:</em> Free</p>
+                <form id="resumeForm" onsubmit="handleResumeUpload(event, 1)">
+                    <input type="file" id="resume" name="resume" accept=".pdf" required>
+                    <button type="submit">Upload Resume for Scoring</button>
+                </form>
+                <div id="scores"></div>
+
+                <h4>2. Resume Tune-Up</h4>
+                <p><em>What it is:</em> Receive detailed feedback on each of your resume scores, including specific changes you should make, the reasons for those changes, and a keyword analysis to optimize your resume.</p>
+                <p><em>Why it’s helpful:</em> Understand exactly what improvements to make and why, enhancing your resume’s effectiveness.</p>
+                <p><em>Cost:</em> $75</p>
+                <form id="resumeTuneUpForm" onsubmit="handleResumeUpload(event, 2)">
+                    <input type="file" name="resume" accept=".pdf" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <button type="submit">Upload Resume for Tune-Up</button>
+                </form>
+                <div id="responseMessage"></div>
+
+                <h4>3. Resume Writer</h4>
+                <p><em>What it is:</em> Provide various elements about your professional background, and our expert writers will create a polished, professional resume for you.</p>
+                <p><em>Why it’s helpful:</em> Save time and get a professionally crafted resume tailored to your career goals, with 3-5 templates to choose from.</p>
+                <p><em>Cost:</em> $125</p>
+                <form id="resumeWriterForm" onsubmit="handleResumeUpload(event, 3)">
+                    <input type="email" id="email" name="email" placeholder="Your email" required>
+                    <textarea id="personal_info" name="personal_info" placeholder="Personal Information" required></textarea>
+                    <textarea id="work_experience" name="work_experience" placeholder="Work Experience" required></textarea>
+                    <textarea id="education" name="education" placeholder="Education" required></textarea>
+                    <textarea id="skills" name="skills" placeholder="Skills" required></textarea>
+                    <textarea id="additional_info" name="additional_info" placeholder="Additional Information"></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+                <div id="writerResponseMessage"></div>
+                <div id="turnaroundTime">
+                    <p>Your polished resume will be ready within 1-2 business days.</p>
+                </div>
+
+                <h3>Why Choose Us?</h3>
+                <p><strong>Expertise in Ministry and Non-Profits:</strong> Our team understands the specific needs of church and non-profit professionals.</p>
+                <p><strong>Personalized Service:</strong> We offer tailored feedback and writing services to ensure your resume highlights your strengths and experiences.</p>
+                <p><strong>Affordable Options:</strong> Whether you’re looking for a quick score or a complete rewrite, we have a service to fit your needs and budget.</p>
+                <h3>Get Started Today!</h3>
+                <p>Ready to take the next step in your career? Upload your resume for a free score or choose one of our premium services for a comprehensive resume makeover.</p>
+            </section>
+        </div>
+    </main>
+    <section aria-label="Subscribe example">
+        <div class="container">
+            <article>
+                <hgroup>
+                    <h2>Contact Us</h2>
+                    <h3>For more information, please reach out to us at support@yourdomain.com or call +1-800-123-4567.</h3>
+                </hgroup>
+                <form class="grid">
+                    <input type="text" id="firstname" name="firstname" placeholder="First Name" aria-label="First Name" required />
+                    <input type="email" id="email" name="email" placeholder="Email" aria-label="Email" required />
+                    <button type="submit" onclick="event.preventDefault()">Subscribe</button>
+                </form>
+            </article>
+        </div>
+    </section>
+    <footer class="container">
+        <small><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small>
+    </footer>
+</body>
+</html>
