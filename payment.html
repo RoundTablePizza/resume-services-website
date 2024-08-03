@@ -77,6 +77,7 @@
         try {
           const resumeBase64 = await encodeFileToBase64(resumeFile);
           localStorage.setItem('uploadedResume', resumeBase64);
+          console.log('Resume stored in localStorage:', resumeBase64);
         } catch (error) {
           console.error('Error encoding file to Base64:', error);
         }
@@ -94,7 +95,8 @@
 
       if (resumeBase64) {
         try {
-          const byteCharacters = atob(resumeBase64.split(',')[1]);
+          const base64String = resumeBase64.split(',')[1];
+          const byteCharacters = atob(base64String);
           const byteNumbers = new Array(byteCharacters.length);
           for (let i = 0; i < byteCharacters.length; i++) {
             byteNumbers[i] = byteCharacters.charCodeAt(i);
@@ -230,4 +232,3 @@
 </body>
 
 </html>
-
