@@ -67,10 +67,21 @@
       const formData = new FormData(event.target);
       const service = new URLSearchParams(window.location.search).get('service');
       const email = document.getElementById('email').value;
-      const resume = localStorage.getItem('uploadedResume');
+      const resumeBase64 = localStorage.getItem('uploadedResume');
+
+      if (resumeBase64) {
+        const byteCharacters = atob(resumeBase64.split(',')[1]);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const resumeBlob = new Blob([byteArray], { type: 'application/pdf' });
+        formData.append('resume', resumeBlob, 'resume.pdf');
+      }
+
       formData.append('service', service);
       formData.append('email', email);
-      formData.append('resume', resume);
 
       document.getElementById('loadingIndicator').style.display = 'block';
 
