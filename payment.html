@@ -1,31 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
   <title>Artisan Resume Services - Payment</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
-
   <!-- Vendor CSS Files -->
   <link href="vendor/aos/aos.css" rel="stylesheet">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
-
   <style>
     .loading {
       display: none;
@@ -70,14 +63,23 @@
       const resumeBase64 = localStorage.getItem('uploadedResume');
 
       if (resumeBase64) {
-        const byteCharacters = atob(resumeBase64.split(',')[1]);
-        const byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        try {
+          const byteCharacters = atob(resumeBase64.split(',')[1]);
+          const byteNumbers = new Array(byteCharacters.length);
+          for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+          }
+          const byteArray = new Uint8Array(byteNumbers);
+          const resumeBlob = new Blob([byteArray], { type: 'application/pdf' });
+          formData.append('resume', resumeBlob, 'resume.pdf');
+        } catch (error) {
+          console.error('Error decoding resumeBase64:', error);
+          document.getElementById('responseMessage').innerText = 'Error processing resume file.';
+          return;
         }
-        const byteArray = new Uint8Array(byteNumbers);
-        const resumeBlob = new Blob([byteArray], { type: 'application/pdf' });
-        formData.append('resume', resumeBlob, 'resume.pdf');
+      } else {
+        document.getElementById('responseMessage').innerText = 'No resume found. Please upload your resume again.';
+        return;
       }
 
       formData.append('service', service);
@@ -107,9 +109,7 @@
     }
   </script>
 </head>
-
 <body>
-
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex justify-content-between">
@@ -127,7 +127,6 @@
       </nav><!-- .navbar -->
     </div>
   </header><!-- #header -->
-
   <main id="main" class="main-page">
     <section id="payment" class="section-bg">
       <div class="container" data-aos="fade-up">
@@ -164,7 +163,6 @@
       </div>
     </section>
   </main><!-- End #main -->
-
   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
@@ -176,9 +174,7 @@
       </div>
     </div>
   </footer><!-- End Footer -->
-
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
   <!-- Vendor JS Files -->
   <script src="vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="vendor/aos/aos.js"></script>
@@ -187,10 +183,7 @@
   <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="vendor/swiper/swiper-bundle.min.js"></script>
   <script src="vendor/php-email-form/validate.js"></script>
-
   <!-- Template Main JS File -->
   <script src="js/main.js"></script>
-
 </body>
-
 </html>
