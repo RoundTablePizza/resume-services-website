@@ -14,7 +14,7 @@
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700|Montserrat:300,400,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="vendor/aos/aos.css" rel="stylesheet">
@@ -96,6 +96,7 @@
       if (resumeBase64) {
         try {
           const base64String = resumeBase64.split(',')[1];
+          console.log('Base64 String:', base64String); // Debugging
           const byteCharacters = atob(base64String);
           const byteNumbers = new Array(byteCharacters.length);
           for (let i = 0; i < byteCharacters.length; i++) {
@@ -232,3 +233,4 @@
 </body>
 
 </html>
+
