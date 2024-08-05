@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Artisan Resume Services - Tune-Up</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="vendor/aos/aos.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <style>
+    .loading {
+      display: none;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #007bff;
+    }
+    .btn-submit {
+      margin-top: 20px;
+    }
+    main.main-page {
+      padding-top: 100px; /* Adjust this value to drop the content down */
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const email = urlParams.get('email');
+      document.getElementById('email').value = email;
+    });
+
+    async function handleTuneUp(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const email = document.getElementById('email').value;
+      const resumeFile = document.getElementById('resume').files[0];
+
+      if (resumeFile) {
+        formData.append('resume', resumeFile);
+      } else {
+        document.getElementById('responseMessage').innerText = 'Please upload your resume.';
+        return;
+      }
+
+      formData.append('email', email);
+      document.getElementById('loadingIndicator').style.display = 'block';
+
+      try {
+        const response = await fetch('https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/tune_up_resume', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+        document.getElementById('loadingIndicator').style.display = 'none';
+
+        if (response.ok) {
+          document.getElementById('responseMessage').innerText = 'Tune-up request received. A confirmation email has been sent.';
+        } else {
+          document.getElementById('responseMessage').innerText = result.error || 'An error occurred during the tune-up request.';
+        }
+      } catch (error) {
+        document.getElementById('loadingIndicator').style.display = 'none';
+        document.getElementById('responseMessage').innerText = 'An error occurred during the tune-up request.';
+        console.error('Error during tune-up request:', error);
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+      <div class="logo-container">
+        <a href="index.html"><img src="img/new-logo.png" alt="Artisan Resume Services" class="img-fluid"></a>
+      </div>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li
