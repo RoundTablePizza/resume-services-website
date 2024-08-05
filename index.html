@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Artisan Resume Services - Elevate Your Career in Ministry and Service</title>
+
+  <title>Artisan Resume Services</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -12,7 +14,7 @@
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700|Montserrat:300,400,500,700" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="vendor/aos/aos.css" rel="stylesheet">
@@ -24,344 +26,147 @@
   <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
 
-  <style>
-    .loading {
-        display: none;
-        font-size: 1.2em;
-        font-weight: bold;
-        color: #007bff;
-    }
-    .score-low {
-        color: red;
-    }
-    .cta-text {
-        color: red;
-        margin-top: 20px;
-    }
-    .logo-container {
-        text-align: center;
-        width: 100%;
-    }
-    .logo-container img {
-        max-width: 250px; /* Adjust the size as needed */
-        height: auto;
-    }
-  </style>
-  <script>
-    async function handleResumeUpload(event, option) {
-        event.preventDefault();
-        console.log("Form submission triggered");
+  <!-- Additional CSS Files -->
+  <link href="css/custom.css" rel="stylesheet">
 
-        const formData = new FormData(event.target);
-        let apiEndpoint = '';
-        let loadingIndicator = document.getElementById('loadingIndicator');
-
-        if (option === 1) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/score_resume';
-        } else if (option === 2) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/tune_up_resume';
-            localStorage.setItem('uploadedResume', document.getElementById('resume').files[0]);
-        } else if (option === 3) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/create_resume';
-        }
-
-        try {
-            loadingIndicator.style.display = 'block';  // Show loading indicator
-            console.log(`Sending request to ${apiEndpoint}`);
-            const response = await fetch(apiEndpoint, {
-                method: 'POST',
-                body: formData
-            });
-
-            loadingIndicator.style.display = 'none';  // Hide loading indicator
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const result = await response.json();
-            console.log("Response received:", result);
-
-            if (option === 1) {
-                displayScore(result);
-            } else if (option === 2) {
-                // Redirect to payment page
-                window.location.href = 'payment.html?service=tuneup&email=' + encodeURIComponent(formData.get('email'));
-            } else if (option === 3) {
-                // Redirect to payment page
-                window.location.href = 'payment.html?service=writing&email=' + encodeURIComponent(formData.get('email'));
-            }
-        } catch (error) {
-            console.error("Error during fetch:", error);
-            loadingIndicator.style.display = 'none';  // Hide loading indicator in case of error
-        }
-    }
-
-    function displayScore(scores) {
-        let scoresDiv = document.getElementById('scores');
-        scoresDiv.innerHTML = '<h2>Resume Scores</h2>';
-        for (let [category, score] of Object.entries(scores)) {
-            let scoreClass = score <= 7 ? 'score-low' : '';
-            scoresDiv.innerHTML += `<p class="${scoreClass}"><strong>${category}:</strong> ${score}</p>`;
-        }
-        scoresDiv.innerHTML += '<p class="cta-text">Unlock your resume\'s full potential. Visit <a href="#resumeTuneUp">Resume Tune-Up</a> to understand your score and learn how to enhance it.</p>';
-    }
-
-    function displayMessage(message, elementId) {
-        document.getElementById(elementId).innerText = message;
-    }
-  </script>
 </head>
+
 <body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex justify-content-between">
-
       <div class="logo-container">
         <a href="index.html"><img src="img/new-logo.png" alt="Artisan Resume Services" class="img-fluid"></a>
       </div>
-
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+          <li><a class="nav-link scrollto" href="index.html#services">Services</a></li>
+          <li><a class="nav-link scrollto" href="tune-up.html">Tune-Up - $75</a></li>
+          <li><a class="nav-link scrollto" href="resume-writer.html">Resume Writer - $150</a></li>
+          <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-
     </div>
   </header><!-- #header -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="clearfix">
-    <div class="container" data-aos="fade-up">
-
-      <div class="hero-img" data-aos="zoom-out" data-aos-delay="200">
-        <img src="img/hero-img.svg" alt="" class="img-fluid">
-      </div>
-
-      <div class="hero-info" data-aos="zoom-in" data-aos-delay="100">
-        <h2>We provide<br><span>solutions</span><br>for your resume!</h2>
-        <div>
-          <a href="#about" class="btn-get-started scrollto">Get Started</a>
-          <a href="#services" class="btn-services scrollto">Our Services</a>
-        </div>
-      </div>
-
+  <section id="hero">
+    <div class="hero-container" data-aos="fade-in">
+      <h1>Welcome to Artisan Resume Services</h1>
+      <h2>We specialize in crafting resumes for ministry and non-profit professionals</h2>
+      <a href="#services" class="btn-get-started scrollto">Get Started</a>
     </div>
   </section><!-- End Hero Section -->
 
   <main id="main">
 
     <!-- ======= About Section ======= -->
-    <section id="about">
+    <section id="about" class="about">
       <div class="container" data-aos="fade-up">
-
-        <header class="section-header">
-          <h3>About Us</h3>
-          <p>We understand the unique needs of professionals in the church and non-profit sectors. Our specialized resume writing services are designed to help you present your skills and experience in the best light, ensuring you stand out in your job search.</p>
-        </header>
-
-        <div class="row about-container">
-
-          <div class="col-lg-6 content order-lg-1 order-2">
-            <p>
-              At Artisan Resume Services, we offer tailored feedback and writing services to ensure your resume highlights your strengths and experiences.
-            </p>
-            <p>
-              Whether you're looking for a quick score or a complete rewrite, we have a service to fit your needs and budget.
-            </p>
-
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="bi bi-card-checklist"></i></div>
-              <h4 class="title"><a href="">Resume Scoring</a></h4>
-              <p class="description">Upload a PDF version of your resume and receive a score for each major section, rated from 1-10.</p>
-            </div>
-
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="bi bi-brightness-high"></i></div>
-              <h4 class="title"><a href="">Resume Tune-Up - $75</a></h4>
-              <p class="description">Receive detailed feedback on each of your resume scores, including specific changes you should make, the reasons for those changes, and a keyword analysis to optimize your resume.</p>
-            </div>
-
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="bi bi-calendar4-week"></i></div>
-              <h4 class="title"><a href="">Resume Writer - $150</a></h4>
-              <p class="description">Provide various elements about your professional background, and our expert writers will create a polished, professional resume for you.</p>
-            </div>
-
+        <div class="row">
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+            <img src="img/about.jpg" class="img-fluid" alt="">
           </div>
-
-          <div class="col-lg-6 background order-lg-2" data-aos="zoom-in">
-            <img src="img/about-img.svg" class="img-fluid" alt="">
+          <div class="col-lg-6 order-2 order-lg-1 content">
+            <h3>Why Choose Us?</h3>
+            <p>
+              We have expertise in Ministry and Non-Profits, and offer personalized service to ensure your resume highlights your strengths and experiences. Our team worked in both vocational and bivocational ministry. We know what it is like to work in ministry and non-profits. Our team has hired individuals and worked with some of the largest and most innovative churches in America. Along with ministry work, we have a tech background specifically within the education space. We have a deep love for the local church and ministry professionals.
+            </p>
           </div>
         </div>
       </div>
     </section><!-- End About Section -->
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="section-bg">
+    <section id="services" class="services section-bg">
       <div class="container" data-aos="fade-up">
 
         <header class="section-header">
-          <h3>Services</h3>
-          <p>Our services are designed to help you succeed in your job search.</p>
+          <h3>Our Services</h3>
+          <p>Check out the services we offer to help you with your resume needs.</p>
         </header>
 
-        <div class="row justify-content-center">
-
-          <div class="col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="100">
-            <div class="box">
-              <div class="icon"><i class="bi bi-briefcase" style="color: #ff689b;"></i></div>
-              <h4 class="title"><a href="">Resume Scoring</a></h4>
-              <p class="description">Upload a PDF version of your resume and receive a score for each major section, rated from 1-10.</p>
-              <form id="resumeForm" onsubmit="handleResumeUpload(event, 1)">
-                <input type="file" id="resume" name="resume" accept=".pdf" required class="form-control mb-2">
-                <button type="submit" class="btn btn-primary">Upload Resume for Scoring</button>
-              </form>
-              <div id="loadingIndicator" class="loading">Loading...</div>
-              <div id="scores"></div>
-            </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="100">
+            <h4 class="title"><a href="#">Resume Scoring - Free</a></h4>
+            <p class="description">Upload your resume for a quick score in key areas.</p>
           </div>
 
-          <div class="col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="200">
-            <div class="box">
-              <div class="icon"><i class="bi bi-card-checklist" style="color: #e9bf06;"></i></div>
-              <h4 class="title"><a href="">Resume Tune-Up - $75</a></h4>
-              <p class="description">Receive detailed feedback on each of your resume scores, including specific changes you should make, the reasons for those changes, and a keyword analysis to optimize your resume.</p>
-              <form id="resumeTuneUpForm" onsubmit="handleResumeUpload(event, 2)">
-                <input type="file" name="resume" accept=".pdf" required class="form-control mb-2">
-                <input type="email" name="email" placeholder="Your Email" required class="form-control mb-2">
-                <button type="submit" class="btn btn-primary">Upload Resume for Tune-Up</button>
-              </form>
-              <div id="responseMessage"></div>
-            </div>
+          <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="200">
+            <h4 class="title"><a href="tune-up.html">Resume Tune-Up - $75</a></h4>
+            <p class="description">Get detailed feedback on your resume and how to improve it.</p>
           </div>
 
-          <div class="col-md-6 col-lg-5" data-aos="zoom-in" data-aos-delay="300">
-            <div class="box">
-              <div class="icon"><i class="bi bi-brightness-high" style="color: #d6ff22;"></i></div>
-              <h4 class="title"><a href="">Resume Writer - $150</a></h4>
-              <p class="description">Provide various elements about your professional background, and our expert writers will create a polished, professional resume for you.</p>
-              <form id="resumeWriterForm" onsubmit="handleResumeUpload(event, 3)">
-                <input type="email" id="email" name="email" placeholder="Your email" required class="form-control mb-2">
-                <textarea id="personal_info" name="personal_info" placeholder="Personal Information" required class="form-control mb-2"></textarea>
-                <textarea id="work_experience" name="work_experience" placeholder="Work Experience" required class="form-control mb-2"></textarea>
-                <textarea id="education" name="education" placeholder="Education" required class="form-control mb-2"></textarea>
-                <textarea id="skills" name="skills" placeholder="Skills" required class="form-control mb-2"></textarea>
-                <textarea id="additional_info" name="additional_info" placeholder="Additional Information" class="form-control mb-2"></textarea>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-              <div id="writerResponseMessage"></div>
-            </div>
+          <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="300">
+            <h4 class="title"><a href="resume-writer.html">Resume Writer - $150</a></h4>
+            <p class="description">Have our experts craft a professional resume for you.</p>
           </div>
-
         </div>
+
       </div>
     </section><!-- End Services Section -->
 
-    <!-- ======= Why Us Section ======= -->
-    <section id="why-us">
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
+
         <header class="section-header">
-          <h3>Why choose us?</h3>
-          <p>We have expertise in Ministry and Non-Profits, and offer personalized service to ensure your resume highlights your strengths and experiences. Our team has worked in both vocational and bivocational ministry, and we understand the unique challenges and opportunities in these fields. We have hired individuals and collaborated with some of the largest and most innovative churches in America. Additionally, our team has a strong background in tech, particularly within the education sector. We are deeply committed to supporting the local church and ministry professionals.</p>
+          <h3>Contact Us</h3>
         </header>
 
-        <div class="row row-eq-height justify-content-center">
-
-          <div class="col-lg-4 mb-4">
-            <div class="card" data-aos="zoom-in" data-aos-delay="100">
-              <i class="bi bi-calendar4-week"></i>
-              <div class="card-body">
-                <h5 class="card-title">Expertise in Ministry and Non-Profits</h5>
-                <p class="card-text">Our team understands the specific needs of church and non-profit professionals.</p>
-              </div>
+        <div class="row contact-info">
+          <div class="col-md-4">
+            <div class="contact-address">
+              <i class="bi bi-geo-alt"></i>
+              <h3>Address</h3>
+              <address>123 Street, Seattle, WA, USA</address>
             </div>
           </div>
 
-          <div class="col-lg-4 mb-4">
-            <div class="card" data-aos="zoom-in" data-aos-delay="200">
-              <i class="bi bi-camera-reels"></i>
-              <div class="card-body">
-                <h5 class="card-title">Personalized Service</h5>
-                <p class="card-text">We offer tailored feedback and writing services to ensure your resume highlights your strengths and experiences.</p>
-              </div>
+          <div class="col-md-4">
+            <div class="contact-phone">
+              <i class="bi bi-phone"></i>
+              <h3>Phone Number</h3>
+              <p><a href="tel:+155895548855">+1 5589 55488 55</a></p>
             </div>
           </div>
 
-          <div class="col-lg-4 mb-4">
-            <div class="card" data-aos="zoom-in" data-aos-delay="300">
-              <i class="bi bi-chat-square-text"></i>
-              <div class="card-body">
-                <h5 class="card-title">Affordable Options</h5>
-                <p class="card-text">Whether you're looking for a quick score or a complete rewrite, we have a service to fit your needs and budget.</p>
-              </div>
+          <div class="col-md-4">
+            <div class="contact-email">
+              <i class="bi bi-envelope"></i>
+              <h3>Email</h3>
+              <p><a href="mailto:support@artisanresumeservices.com">support@artisanresumeservices.com</a></p>
             </div>
           </div>
-
         </div>
 
-      </div>
-    </section><!-- End Why Us Section -->
-
-    <!-- ======= Contact Section ======= -->
-    <section id="contact">
-      <div class="container-fluid" data-aos="fade-up">
-
-        <div class="section-header">
-          <h3>Contact Us</h3>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-6">
-            <div class="map mb-4 mb-lg-0">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.5106229407024!2d-122.33648448436919!3d47.60567657908483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54906ab4d9b1a1a9%3A0x8c9f57a58c7b9494!2sDowntown%20Seattle!5e0!3m2!1sen!2sus!4v1625881146231!5m2!1sen!2sus" frameborder="0" style="border:0; width: 100%; height: 340px;" allowfullscreen></iframe>
-            </div>
-          </div>
-
-          <div class="col-lg-6">
+        <div class="form">
+          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
             <div class="row">
-              <div class="col-md-6 info">
-                <i class="bi bi-geo-alt"></i>
-                <p>A108 Adam Street, NY 535022</p>
+              <div class="col-md-6 form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
               </div>
-              <div class="col-md-6 info">
-                <i class="bi bi-envelope"></i>
-                <p>support@artisanresumeservices.com</p>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
               </div>
             </div>
-
-            <div class="form">
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                <div class="row">
-                  <div class="form-group col-lg-6">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-                  </div>
-                  <div class="form-group col-lg-6 mt-3 mt-lg-0">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-                  </div>
-                </div>
-                <div class="form-group mt-3">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                </div>
-                <div class="form-group mt-3">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                </div>
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
-                <div class="text-center"><button type="submit" title="Send Message">Send Message</button></div>
-              </form>
+            <div class="form-group mt-3">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
             </div>
-          </div>
-
+            <div class="form-group mt-3">
+              <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+            </div>
+            <div class="my-3">
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your message has been sent. Thank you!</div>
+            </div>
+            <div class="text-center"><button type="submit">Send Message</button></div>
+          </form>
         </div>
 
       </div>
@@ -371,48 +176,6 @@
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
-    <div class="footer-top">
-      <div class="container">
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6 footer-info">
-            <h3>Artisan Resume Services</h3>
-            <p>We provide specialized resume writing services for professionals in the church and non-profit sectors.</p>
-          </div>
-
-          <div class="col-lg-2 col-md-6 footer-links">
-            <h4>Useful Links</h4>
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Terms of service</a></li>
-              <li><a href="#">Privacy policy</a></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-contact">
-            <h4>Contact Us</h4>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br>
-              <strong>Email:</strong> support@artisanresumeservices.com<br>
-            </p>
-          </div>
-
-          <div class="col-lg-3 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Subscribe to our newsletter to stay updated on the latest resume writing tips and services.</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
     <div class="container">
       <div class="copyright">
         &copy; Copyright <strong>Artisan Resume Services</strong>. All Rights Reserved
@@ -438,5 +201,6 @@
   <script src="js/main.js"></script>
 
 </body>
+
 </html>
 
