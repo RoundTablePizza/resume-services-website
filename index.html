@@ -43,7 +43,7 @@
         width: 100%;
     }
     .logo-container img {
-        max-width: 250px; /* Adjust the size as needed */
+        max-width: 250px;
         height: auto;
     }
   </style>
@@ -85,11 +85,11 @@
             if (option === 1) {
                 displayScore(result);
             } else if (option === 2) {
-                // Redirect to payment page
-                window.location.href = 'payment.html?service=tuneup&email=' + encodeURIComponent(formData.get('email'));
+                // Redirect to confirmation page
+                window.location.href = 'confirmation.html';
             } else if (option === 3) {
-                // Redirect to payment page
-                window.location.href = 'payment.html?service=writing&email=' + encodeURIComponent(formData.get('email'));
+                // Redirect to confirmation page
+                window.location.href = 'confirmation.html';
             }
         } catch (error) {
             console.error("Error during fetch:", error);
@@ -104,7 +104,7 @@
             let scoreClass = score <= 7 ? 'score-low' : '';
             scoresDiv.innerHTML += `<p class="${scoreClass}"><strong>${category}:</strong> ${score}</p>`;
         }
-        scoresDiv.innerHTML += '<p class="cta-text">Unlock your resume\'s full potential. Visit <a href="#resumeTuneUp">Resume Tune-Up</a> to understand your score and learn how to enhance it.</p>';
+        scoresDiv.innerHTML += '<p class="cta-text">Unlock your resume\'s full potential. Visit <a href="tune-up.html">Resume Tune-Up</a> to understand your score and learn how to enhance it.</p>';
     }
 
     function displayMessage(message, elementId) {
@@ -179,7 +179,7 @@
 
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="bi bi-card-checklist"></i></div>
-              <h4 class="title"><a href="">Resume Scoring - Free</a></h4>
+              <h4 class="title"><a href="#">Resume Scoring - Free</a></h4>
               <p class="description">Upload a PDF version of your resume and receive a score for each major section, rated from 1-10.</p>
             </div>
 
