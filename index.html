@@ -26,89 +26,89 @@
 
   <style>
     .loading {
-      display: none;
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #007bff;
+        display: none;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #007bff;
     }
     .score-low {
-      color: red;
+        color: red;
     }
     .cta-text {
-      color: red;
-      margin-top: 20px;
+        color: red;
+        margin-top: 20px;
     }
     .logo-container {
-      text-align: center;
-      width: 100%;
+        text-align: center;
+        width: 100%;
     }
     .logo-container img {
-      max-width: 250px; /* Adjust the size as needed */
-      height: auto;
+        max-width: 250px; /* Adjust the size as needed */
+        height: auto;
     }
   </style>
   <script>
     async function handleResumeUpload(event, option) {
-      event.preventDefault();
-      console.log("Form submission triggered");
+        event.preventDefault();
+        console.log("Form submission triggered");
 
-      const formData = new FormData(event.target);
-      let apiEndpoint = '';
-      let loadingIndicator = document.getElementById('loadingIndicator');
-
-      if (option === 1) {
-        apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/score_resume';
-      } else if (option === 2) {
-        apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/tune_up_resume';
-        localStorage.setItem('uploadedResume', document.getElementById('resume').files[0]);
-      } else if (option === 3) {
-        apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/create_resume';
-      }
-
-      try {
-        loadingIndicator.style.display = 'block';  // Show loading indicator
-        console.log(`Sending request to ${apiEndpoint}`);
-        const response = await fetch(apiEndpoint, {
-          method: 'POST',
-          body: formData
-        });
-
-        loadingIndicator.style.display = 'none';  // Hide loading indicator
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const result = await response.json();
-        console.log("Response received:", result);
+        const formData = new FormData(event.target);
+        let apiEndpoint = '';
+        let loadingIndicator = document.getElementById('loadingIndicator');
 
         if (option === 1) {
-          displayScore(result);
+            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/score_resume';
         } else if (option === 2) {
-          // Redirect to payment page
-          window.location.href = 'payment.html?service=tuneup&email=' + encodeURIComponent(formData.get('email'));
+            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/tune_up_resume';
+            localStorage.setItem('uploadedResume', document.getElementById('resume').files[0]);
         } else if (option === 3) {
-          // Redirect to payment page
-          window.location.href = 'payment.html?service=writing&email=' + encodeURIComponent(formData.get('email'));
+            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/create_resume';
         }
-      } catch (error) {
-        console.error("Error during fetch:", error);
-        loadingIndicator.style.display = 'none';  // Hide loading indicator in case of error
-      }
+
+        try {
+            loadingIndicator.style.display = 'block';  // Show loading indicator
+            console.log(`Sending request to ${apiEndpoint}`);
+            const response = await fetch(apiEndpoint, {
+                method: 'POST',
+                body: formData
+            });
+
+            loadingIndicator.style.display = 'none';  // Hide loading indicator
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log("Response received:", result);
+
+            if (option === 1) {
+                displayScore(result);
+            } else if (option === 2) {
+                // Redirect to payment page
+                window.location.href = 'payment.html?service=tuneup&email=' + encodeURIComponent(formData.get('email'));
+            } else if (option === 3) {
+                // Redirect to payment page
+                window.location.href = 'payment.html?service=writing&email=' + encodeURIComponent(formData.get('email'));
+            }
+        } catch (error) {
+            console.error("Error during fetch:", error);
+            loadingIndicator.style.display = 'none';  // Hide loading indicator in case of error
+        }
     }
 
     function displayScore(scores) {
-      let scoresDiv = document.getElementById('scores');
-      scoresDiv.innerHTML = '<h2>Resume Scores</h2>';
-      for (let [category, score] of Object.entries(scores)) {
-        let scoreClass = score <= 7 ? 'score-low' : '';
-        scoresDiv.innerHTML += `<p class="${scoreClass}"><strong>${category}:</strong> ${score}</p>`;
-      }
-      scoresDiv.innerHTML += '<p class="cta-text">Unlock your resume\'s full potential. Visit <a href="tune-up.html">Resume Tune-Up</a> to understand your score and learn how to enhance it.</p>';
+        let scoresDiv = document.getElementById('scores');
+        scoresDiv.innerHTML = '<h2>Resume Scores</h2>';
+        for (let [category, score] of Object.entries(scores)) {
+            let scoreClass = score <= 7 ? 'score-low' : '';
+            scoresDiv.innerHTML += `<p class="${scoreClass}"><strong>${category}:</strong> ${score}</p>`;
+        }
+        scoresDiv.innerHTML += '<p class="cta-text">Unlock your resume\'s full potential. Visit <a href="#resumeTuneUp">Resume Tune-Up</a> to understand your score and learn how to enhance it.</p>';
     }
 
     function displayMessage(message, elementId) {
-      document.getElementById(elementId).innerText = message;
+        document.getElementById(elementId).innerText = message;
     }
   </script>
 </head>
@@ -177,30 +177,6 @@
               Whether you're looking for a quick score or a complete rewrite, we have a service to fit your needs and budget.
             </p>
 
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="bi bi-card-checklist"></i></div>
-              <h4 class="title"><a href="#">Resume Scoring - Free</a></h4>
-              <p class="description">Upload a PDF version of your resume and receive a score for each major section, rated from 1-10.</p>
-              <form id="resumeForm" onsubmit="handleResumeUpload(event, 1)">
-                <input type="file" id="resume" name="resume" required>
-                <button type="submit">Upload</button>
-              </form>
-              <div id="scores"></div>
-              <div id="loadingIndicator" class="loading">Processing...</div>
-            </div>
-
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="bi bi-brightness-high"></i></div>
-              <h4 class="title"><a href="tune-up.html">Resume Tune-Up - $75</a></h4>
-              <p class="description">Receive detailed feedback on each of your resume scores, including specific changes you should make, the reasons for those changes, and a keyword analysis to optimize your resume.</p>
-            </div>
-
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="bi bi-card-text"></i></div>
-              <h4 class="title"><a href="resume-writer.html">Resume Writer - $150</a></h4>
-              <p class="description">Provide various elements about your professional background, and our expert writers will create a polished, professional resume for you.</p>
-            </div>
-
           </div>
 
           <div class="col-lg-6 background order-lg-2" data-aos="zoom-in">
@@ -234,6 +210,23 @@
           <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="300">
             <h4 class="title"><a href="resume-writer.html">Resume Writer - $150</a></h4>
             <p class="description">Have our experts craft a professional resume for you.</p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="box">
+              <h4 class="title">Upload your resume for scoring</h4>
+              <form id="resumeForm" onsubmit="handleResumeUpload(event, 1)">
+                <div class="mb-3">
+                  <label for="resume" class="form-label">Upload Resume (PDF)</label>
+                  <input type="file" class="form-control" id="resume" name="resume" accept="application/pdf" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+                <div id="loadingIndicator" class="loading">Processing...</div>
+              </form>
+              <div id="scores"></div>
+            </div>
           </div>
         </div>
 
