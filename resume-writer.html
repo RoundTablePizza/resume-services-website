@@ -22,6 +22,9 @@
         font-weight: bold;
         color: #007bff;
     }
+    main.main-page {
+        padding-top: 100px; /* Adjust this value to drop the content down */
+    }
   </style>
   <script>
     async function handleResumeWriterUpload(event) {
@@ -75,7 +78,7 @@
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" class="main-page">
     <section id="resume-writer" class="section-bg">
       <div class="container" data-aos="fade-up">
         <header class="section-header">
@@ -85,7 +88,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="box">
-              <h4 class="title">Provide your details for a professional resume</h4>
+              <h4 class="title">Provide Your Details for a Professional Resume</h4>
               <form id="resumeWriterForm" onsubmit="handleResumeWriterUpload(event)">
                 <div class="mb-3">
                   <label for="email" class="form-label">Your Email</label>
