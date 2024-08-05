@@ -26,89 +26,89 @@
 
   <style>
     .loading {
-        display: none;
-        font-size: 1.2em;
-        font-weight: bold;
-        color: #007bff;
+      display: none;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #007bff;
     }
     .score-low {
-        color: red;
+      color: red;
     }
     .cta-text {
-        color: red;
-        margin-top: 20px;
+      color: red;
+      margin-top: 20px;
     }
     .logo-container {
-        text-align: center;
-        width: 100%;
+      text-align: center;
+      width: 100%;
     }
     .logo-container img {
-        max-width: 250px; /* Adjust the size as needed */
-        height: auto;
+      max-width: 250px; /* Adjust the size as needed */
+      height: auto;
     }
   </style>
   <script>
     async function handleResumeUpload(event, option) {
-        event.preventDefault();
-        console.log("Form submission triggered");
+      event.preventDefault();
+      console.log("Form submission triggered");
 
-        const formData = new FormData(event.target);
-        let apiEndpoint = '';
-        let loadingIndicator = document.getElementById('loadingIndicator');
+      const formData = new FormData(event.target);
+      let apiEndpoint = '';
+      let loadingIndicator = document.getElementById('loadingIndicator');
+
+      if (option === 1) {
+        apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/score_resume';
+      } else if (option === 2) {
+        apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/tune_up_resume';
+        localStorage.setItem('uploadedResume', document.getElementById('resume').files[0]);
+      } else if (option === 3) {
+        apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/create_resume';
+      }
+
+      try {
+        loadingIndicator.style.display = 'block';  // Show loading indicator
+        console.log(`Sending request to ${apiEndpoint}`);
+        const response = await fetch(apiEndpoint, {
+          method: 'POST',
+          body: formData
+        });
+
+        loadingIndicator.style.display = 'none';  // Hide loading indicator
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("Response received:", result);
 
         if (option === 1) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/score_resume';
+          displayScore(result);
         } else if (option === 2) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/tune_up_resume';
-            localStorage.setItem('uploadedResume', document.getElementById('resume').files[0]);
+          // Redirect to payment page
+          window.location.href = 'payment.html?service=tuneup&email=' + encodeURIComponent(formData.get('email'));
         } else if (option === 3) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/create_resume';
+          // Redirect to payment page
+          window.location.href = 'payment.html?service=writing&email=' + encodeURIComponent(formData.get('email'));
         }
-
-        try {
-            loadingIndicator.style.display = 'block';  // Show loading indicator
-            console.log(`Sending request to ${apiEndpoint}`);
-            const response = await fetch(apiEndpoint, {
-                method: 'POST',
-                body: formData
-            });
-
-            loadingIndicator.style.display = 'none';  // Hide loading indicator
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const result = await response.json();
-            console.log("Response received:", result);
-
-            if (option === 1) {
-                displayScore(result);
-            } else if (option === 2) {
-                // Redirect to payment page
-                window.location.href = 'payment.html?service=tuneup&email=' + encodeURIComponent(formData.get('email'));
-            } else if (option === 3) {
-                // Redirect to payment page
-                window.location.href = 'payment.html?service=writing&email=' + encodeURIComponent(formData.get('email'));
-            }
-        } catch (error) {
-            console.error("Error during fetch:", error);
-            loadingIndicator.style.display = 'none';  // Hide loading indicator in case of error
-        }
+      } catch (error) {
+        console.error("Error during fetch:", error);
+        loadingIndicator.style.display = 'none';  // Hide loading indicator in case of error
+      }
     }
 
     function displayScore(scores) {
-        let scoresDiv = document.getElementById('scores');
-        scoresDiv.innerHTML = '<h2>Resume Scores</h2>';
-        for (let [category, score] of Object.entries(scores)) {
-            let scoreClass = score <= 7 ? 'score-low' : '';
-            scoresDiv.innerHTML += `<p class="${scoreClass}"><strong>${category}:</strong> ${score}</p>`;
-        }
-        scoresDiv.innerHTML += '<p class="cta-text">Unlock your resume\'s full potential. Visit <a href="#resumeTuneUp">Resume Tune-Up</a> to understand your score and learn how to enhance it.</p>';
+      let scoresDiv = document.getElementById('scores');
+      scoresDiv.innerHTML = '<h2>Resume Scores</h2>';
+      for (let [category, score] of Object.entries(scores)) {
+        let scoreClass = score <= 7 ? 'score-low' : '';
+        scoresDiv.innerHTML += `<p class="${scoreClass}"><strong>${category}:</strong> ${score}</p>`;
+      }
+      scoresDiv.innerHTML += '<p class="cta-text">Unlock your resume\'s full potential. Visit <a href="tune-up.html">Resume Tune-Up</a> to understand your score and learn how to enhance it.</p>';
     }
 
     function displayMessage(message, elementId) {
-        document.getElementById(elementId).innerText = message;
+      document.getElementById(elementId).innerText = message;
     }
   </script>
 </head>
@@ -179,8 +179,14 @@
 
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="bi bi-card-checklist"></i></div>
-              <h4 class="title"><a href="">Resume Scoring - Free</a></h4>
+              <h4 class="title"><a href="#">Resume Scoring - Free</a></h4>
               <p class="description">Upload a PDF version of your resume and receive a score for each major section, rated from 1-10.</p>
+              <form id="resumeForm" onsubmit="handleResumeUpload(event, 1)">
+                <input type="file" id="resume" name="resume" required>
+                <button type="submit">Upload</button>
+              </form>
+              <div id="scores"></div>
+              <div id="loadingIndicator" class="loading">Processing...</div>
             </div>
 
             <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
