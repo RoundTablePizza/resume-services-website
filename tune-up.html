@@ -96,4 +96,68 @@
       </div>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li
+          <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
+          <li><a class="nav-link scrollto" href="index.html#services">Services</a></li>
+          <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header><!-- #header -->
+
+  <main id="main" class="main-page">
+    <section id="tune-up" class="section-bg">
+      <div class="container" data-aos="fade-up">
+        <header class="section-header">
+          <h3>Resume Tune-Up</h3>
+        </header>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="box">
+              <form onsubmit="handleTuneUp(event)">
+                <input type="hidden" id="email" name="email">
+                <div class="mb-3">
+                  <label for="resume" class="form-label">Upload Resume (PDF)</label>
+                  <input type="file" class="form-control" id="resume" name="resume" accept="application/pdf" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-submit">Submit for Tune-Up</button>
+                <div id="loadingIndicator" class="loading">Processing...</div>
+                <div id="responseMessage" class="error"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>Artisan Resume Services</strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="vendor/aos/aos.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
