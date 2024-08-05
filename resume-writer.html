@@ -1,97 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Artisan Resume Services - Resume Writer</title>
+  <title>Resume Writer - Artisan Resume Services</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
-  <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700|Montserrat:300,400,500,700" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
   <link href="vendor/aos/aos.css" rel="stylesheet">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
   <link href="css/style.css" rel="stylesheet">
-
   <style>
     .loading {
-      display: none;
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #007bff;
-    }
-    .btn-submit {
-      margin-top: 20px;
-    }
-    main.main-page {
-      padding-top: 100px; /* Adjust this value to drop the content down */
+        display: none;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #007bff;
     }
   </style>
   <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const email = urlParams.get('email');
-      document.getElementById('email').value = email;
-    });
+    async function handleResumeWriterUpload(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/create_resume';
+        const loadingIndicator = document.getElementById('loadingIndicator');
 
-    async function handleResumeWriter(event) {
-      event.preventDefault();
-      const formData = new FormData(event.target);
-      const email = document.getElementById('email').value;
-      const personalInfo = document.getElementById('personal_info').value;
-      const workExperience = document.getElementById('work_experience').value;
-      const education = document.getElementById('education').value;
-      const skills = document.getElementById('skills').value;
-      const additionalInfo = document.getElementById('additional_info').value;
+        try {
+            loadingIndicator.style.display = 'block';
+            const response = await fetch(apiEndpoint, {
+                method: 'POST',
+                body: formData
+            });
 
-      formData.append('email', email);
-      formData.append('personal_info', personalInfo);
-      formData.append('work_experience', workExperience);
-      formData.append('education', education);
-      formData.append('skills', skills);
-      formData.append('additional_info', additionalInfo);
+            loadingIndicator.style.display = 'none';
 
-      document.getElementById('loadingIndicator').style.display = 'block';
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
 
-      try {
-        const response = await fetch('https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/create_resume', {
-          method: 'POST',
-          body: formData
-        });
-
-        const result = await response.json();
-        document.getElementById('loadingIndicator').style.display = 'none';
-
-        if (response.ok) {
-          document.getElementById('responseMessage').innerText = 'Resume writer request received. A confirmation email has been sent.';
-        } else {
-          document.getElementById('responseMessage').innerText = result.error || 'An error occurred during the resume writer request.';
+            const result = await response.json();
+            alert(result.message);
+            // Redirect to confirmation page
+            window.location.href = 'confirmation.html';
+        } catch (error) {
+            console.error("Error during fetch:", error);
+            loadingIndicator.style.display = 'none';
+            alert('An error occurred while processing your request. Please try again.');
         }
-      } catch (error) {
-        document.getElementById('loadingIndicator').style.display = 'none';
-        document.getElementById('responseMessage').innerText = 'An error occurred during the resume writer request.';
-        console.error('Error during resume writer request:', error);
-      }
     }
   </script>
 </head>
-
 <body>
-
-  <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex justify-content-between">
       <div class="logo-container">
@@ -102,24 +66,31 @@
           <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="index.html#about">About</a></li>
           <li><a class="nav-link scrollto" href="index.html#services">Services</a></li>
+          <li><a class="nav-link scrollto" href="tune-up.html">Tune-Up</a></li>
+          <li><a class="nav-link scrollto" href="resume-writer.html">Resume Writer</a></li>
           <li><a class="nav-link scrollto" href="index.html#contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav>
     </div>
-  </header><!-- #header -->
+  </header>
 
-  <main id="main" class="main-page">
+  <main id="main">
     <section id="resume-writer" class="section-bg">
       <div class="container" data-aos="fade-up">
         <header class="section-header">
           <h3>Resume Writer</h3>
+          <p>Provide various elements about your professional background, and our expert writers will create a polished, professional resume for you.</p>
         </header>
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="box">
-              <form onsubmit="handleResumeWriter(event)">
-                <input type="hidden" id="email" name="email">
+              <h4 class="title">Provide your details for a professional resume</h4>
+              <form id="resumeWriterForm" onsubmit="handleResumeWriterUpload(event)">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Your Email</label>
+                  <input type="email" class="form-control" id="email" name="email" required>
+                </div>
                 <div class="mb-3">
                   <label for="personal_info" class="form-label">Personal Information</label>
                   <textarea class="form-control" id="personal_info" name="personal_info" rows="3" required></textarea>
@@ -140,18 +111,16 @@
                   <label for="additional_info" class="form-label">Additional Information</label>
                   <textarea class="form-control" id="additional_info" name="additional_info" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary btn-submit">Submit for Resume Writing</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
                 <div id="loadingIndicator" class="loading">Processing...</div>
-                <div id="responseMessage" class="error"></div>
               </form>
             </div>
           </div>
         </div>
       </div>
     </section>
-  </main><!-- End #main -->
+  </main>
 
-  <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
       <div class="copyright">
@@ -161,11 +130,8 @@
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
-  </footer><!-- End Footer -->
-
+  </footer>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Vendor JS Files -->
   <script src="vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="vendor/aos/aos.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -173,10 +139,6 @@
   <script src="vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="vendor/swiper/swiper-bundle.min.js"></script>
   <script src="vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
   <script src="js/main.js"></script>
-
 </body>
-
 </html>
