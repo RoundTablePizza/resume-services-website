@@ -22,14 +22,6 @@
         font-weight: bold;
         color: #007bff;
     }
-    .template-img {
-        width: 100%;
-        height: auto;
-        margin-bottom: 20px;
-    }
-    .template-option {
-        margin-bottom: 20px;
-    }
     main.main-page {
         padding-top: 100px; /* Adjust this value to drop the content down */
     }
@@ -38,6 +30,12 @@
     async function handleResumeWriterUpload(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
+
+        // Debug: log the form data to ensure it's correct
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+
         const apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/create_resume';
         const loadingIndicator = document.getElementById('loadingIndicator');
 
@@ -96,27 +94,19 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="box">
-              <h4 class="title">Select Your Resume Template</h4>
-              <div class="row">
-                <div class="col-md-4 template-option">
-                  <img src="img/minimalist-template.jpg" alt="Minimalist Template" class="template-img">
-                  <label><input type="radio" name="template" value="Minimalist" required> Minimalist</label>
-                </div>
-                <div class="col-md-4 template-option">
-                  <img src="img/professional-template.jpg" alt="Professional Template" class="template-img">
-                  <label><input type="radio" name="template" value="Professional"> Professional</label>
-                </div>
-                <div class="col-md-4 template-option">
-                  <img src="img/artistic-template.jpg" alt="Artistic Template" class="template-img">
-                  <label><input type="radio" name="template" value="Artistic"> Artistic</label>
-                </div>
-              </div>
-              
               <h4 class="title">Provide Your Details for a Professional Resume</h4>
               <form id="resumeWriterForm" onsubmit="handleResumeWriterUpload(event)">
                 <div class="mb-3">
                   <label for="email" class="form-label">Your Email</label>
                   <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                  <label for="template" class="form-label">Select Your Template</label>
+                  <select class="form-control" id="template" name="template" required>
+                    <option value="Minimalist">Minimalist</option>
+                    <option value="Professional">Professional</option>
+                    <option value="Artistic">Artistic</option>
+                  </select>
                 </div>
                 <div class="mb-3">
                   <label for="personal_info" class="form-label">Personal Information</label>
@@ -173,5 +163,6 @@
   <script src="js/main.js"></script>
 </body>
 </html>
+
 
 
