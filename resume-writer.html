@@ -22,6 +22,14 @@
         font-weight: bold;
         color: #007bff;
     }
+    .template-img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    .template-option {
+        margin-bottom: 20px;
+    }
     main.main-page {
         padding-top: 100px; /* Adjust this value to drop the content down */
     }
@@ -88,6 +96,22 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="box">
+              <h4 class="title">Select Your Resume Template</h4>
+              <div class="row">
+                <div class="col-md-4 template-option">
+                  <img src="img/minimalist-template.jpg" alt="Minimalist Template" class="template-img">
+                  <label><input type="radio" name="template" value="Minimalist" required> Minimalist</label>
+                </div>
+                <div class="col-md-4 template-option">
+                  <img src="img/professional-template.jpg" alt="Professional Template" class="template-img">
+                  <label><input type="radio" name="template" value="Professional"> Professional</label>
+                </div>
+                <div class="col-md-4 template-option">
+                  <img src="img/artistic-template.jpg" alt="Artistic Template" class="template-img">
+                  <label><input type="radio" name="template" value="Artistic"> Artistic</label>
+                </div>
+              </div>
+              
               <h4 class="title">Provide Your Details for a Professional Resume</h4>
               <form id="resumeWriterForm" onsubmit="handleResumeWriterUpload(event)">
                 <div class="mb-3">
@@ -113,6 +137,10 @@
                 <div class="mb-3">
                   <label for="additional_info" class="form-label">Additional Information</label>
                   <textarea class="form-control" id="additional_info" name="additional_info" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="headshot" class="form-label">Upload Your Headshot (PDF, 1x1 Ratio)</label>
+                  <input type="file" class="form-control" id="headshot" name="headshot" accept="application/pdf" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <div id="loadingIndicator" class="loading">Processing...</div>
@@ -145,4 +173,5 @@
   <script src="js/main.js"></script>
 </body>
 </html>
+
 
