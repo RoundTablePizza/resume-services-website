@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Artisan Resume Services - Elevate Your Career in Ministry and Service</title>
+  <title>Milkbox Studio - Innovative Solutions for the Next Generation</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;500;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="vendor/aos/aos.css" rel="stylesheet">
@@ -25,23 +25,61 @@
   <link href="css/style.css" rel="stylesheet">
 
   <style>
+    /* Updated styles */
+    body {
+        font-family: 'Lato', sans-serif;
+        background-color: #F5F5F5;
+        color: #333333;
+    }
+    
+    h1, h2, h3, .navbar, .btn {
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+    blockquote, .accent-text {
+        font-family: 'Roboto Slab', serif;
+    }
+
+    .navbar, .footer {
+        background-color: #FFA500;
+        color: #FFFFFF;
+    }
+
+    .btn-primary {
+        background-color: #FFA500;
+        border-color: #FFA500;
+        color: #FFFFFF;
+    }
+
+    a {
+        color: #FFA500;
+    }
+
+    a:hover {
+        color: #333333;
+    }
+
     .loading {
         display: none;
         font-size: 1.2em;
         font-weight: bold;
         color: #007bff;
     }
+
     .score-low {
         color: red;
     }
+
     .cta-text {
         color: red;
         margin-top: 20px;
     }
+
     .logo-container {
         text-align: center;
         width: 100%;
     }
+
     .logo-container img {
         max-width: 250px;
         height: auto;
@@ -57,12 +95,11 @@
         let loadingIndicator = document.getElementById('loadingIndicator');
 
         if (option === 1) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/score_resume';
+            apiEndpoint = 'https://your-replit-url/score_resume';
         } else if (option === 2) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/tune_up_resume';
-            localStorage.setItem('uploadedResume', document.getElementById('resume').files[0]);
+            apiEndpoint = 'https://your-replit-url/tune_up_resume';
         } else if (option === 3) {
-            apiEndpoint = 'https://586409be-bf50-4815-b12d-1d41e26605de-00-22s42cxxy7ntw.kirk.replit.dev/create_resume';
+            apiEndpoint = 'https://your-replit-url/create_resume';
         }
 
         try {
@@ -84,10 +121,7 @@
 
             if (option === 1) {
                 displayScore(result);
-            } else if (option === 2) {
-                // Redirect to confirmation page
-                window.location.href = 'confirmation.html';
-            } else if (option === 3) {
+            } else {
                 // Redirect to confirmation page
                 window.location.href = 'confirmation.html';
             }
@@ -117,42 +151,38 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex justify-content-between">
-
       <div class="logo-container">
-        <a href="index.html"><img src="img/new-logo.png" alt="Artisan Resume Services" class="img-fluid"></a>
+        <a href="index.html"><img src="img/milkbox-logo.png" alt="Milkbox Studio" class="img-fluid"></a>
       </div>
-
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="tune-up.html">Tune-Up</a></li>
+          <li><a class="nav-link scrollto" href="tune-up.html">Resume Tune-Up</a></li>
           <li><a class="nav-link scrollto" href="resume-writer.html">Resume Writer</a></li>
+          <li><a class="nav-link scrollto" href="leadership-consulting.html">Leadership Consulting</a></li>
+          <li><a class="nav-link scrollto" href="ai-consulting.html">AI Consulting</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
+      </nav>
     </div>
-  </header><!-- #header -->
+  </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="clearfix">
     <div class="container" data-aos="fade-up">
-
       <div class="hero-img" data-aos="zoom-out" data-aos-delay="200">
         <img src="img/hero-img.svg" alt="" class="img-fluid">
       </div>
-
       <div class="hero-info" data-aos="zoom-in" data-aos-delay="100">
-        <h2>We provide<br><span>solutions</span><br>for your resume!</h2>
+        <h2>Innovative<br><span>Solutions</span><br>for Your Career!</h2>
         <div>
           <a href="#about" class="btn-get-started scrollto">Get Started</a>
           <a href="#services" class="btn-services scrollto">Our Services</a>
         </div>
       </div>
-
     </div>
   </section><!-- End Hero Section -->
 
@@ -161,20 +191,19 @@
     <!-- ======= About Section ======= -->
     <section id="about">
       <div class="container" data-aos="fade-up">
-
         <header class="section-header">
           <h3>About Us</h3>
-          <p>We understand the unique needs of professionals in the church and non-profit sectors. Our specialized resume writing services are designed to help you present your skills and experience in the best light, ensuring you stand out in your job search.</p>
+          <p>At Milkbox Studio, we provide innovative, creative, and professional services geared toward the next generation of leaders, professionals, and creatives. Our offerings include specialized resume services, leadership consulting, and AI-driven solutions designed to make you stand out in the job market.</p>
         </header>
 
         <div class="row about-container">
 
           <div class="col-lg-6 content order-lg-1 order-2">
             <p>
-              At Artisan Resume Services, we offer tailored feedback and writing services to ensure your resume highlights your strengths and experiences.
+              Our team understands the unique needs of individuals in the church, non-profit, and creative sectors. We tailor our services to ensure your skills and experiences are presented in the best light.
             </p>
             <p>
-              Whether you're looking for a quick score or a complete rewrite, we have a service to fit your needs and budget.
+              Whether you're looking for a quick resume score or a complete leadership transformation, we have a service to fit your needs and budget.
             </p>
 
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
@@ -186,13 +215,13 @@
             <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
               <div class="icon"><i class="bi bi-brightness-high"></i></div>
               <h4 class="title"><a href="tune-up.html">Resume Tune-Up - $75</a></h4>
-              <p class="description">Receive detailed feedback on each of your resume scores, including specific changes you should make, the reasons for those changes, and a keyword analysis to optimize your resume.</p>
+              <p class="description">Receive detailed feedback on your resume scores, including specific changes and keyword analysis to optimize your resume.</p>
             </div>
 
             <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
               <div class="icon"><i class="bi bi-card-text"></i></div>
               <h4 class="title"><a href="resume-writer.html">Resume Writer - $150</a></h4>
-              <p class="description">Provide various elements about your professional background, and our expert writers will create a polished, professional resume for you.</p>
+              <p class="description">Provide various elements about your professional background, and our expert writers will craft a polished, professional resume for you.</p>
             </div>
 
           </div>
@@ -201,17 +230,15 @@
             <img src="img/about-img.svg" class="img-fluid" alt="">
           </div>
         </div>
-
       </div>
     </section><!-- End About Section -->
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="section-bg">
       <div class="container" data-aos="fade-up">
-
         <header class="section-header">
           <h3>Our Services</h3>
-          <p>At Artisan Resume Services, we offer a range of services to meet your resume needs.</p>
+          <p>At Milkbox Studio, we offer a range of services designed to elevate your career and leadership potential.</p>
         </header>
 
         <div class="row">
@@ -228,6 +255,16 @@
           <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="300">
             <h4 class="title"><a href="resume-writer.html">Resume Writer - $150</a></h4>
             <p class="description">Have our experts craft a professional resume for you.</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="400">
+            <h4 class="title"><a href="leadership-consulting.html">Leadership Consulting</a></h4>
+            <p class="description">Certified Working Genius Consulting for organizations and individuals.</p>
+          </div>
+
+          <div class="col-lg-4 col-md-6 box" data-aos="fade-up" data-aos-delay="500">
+            <h4 class="title"><a href="ai-consulting.html">AI Consulting</a></h4>
+            <p class="description">Innovative AI solutions tailored for the church and non-profit sector.</p>
           </div>
         </div>
 
@@ -254,7 +291,6 @@
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="section-bg">
       <div class="container" data-aos="fade-up">
-
         <header class="section-header">
           <h3>Contact Us</h3>
         </header>
@@ -280,7 +316,7 @@
             <div class="contact-email">
               <i class="bi bi-envelope"></i>
               <h3>Email</h3>
-              <p><a href="mailto:support@artisanresumeservices.com">support@artisanresumeservices.com</a></p>
+              <p><a href="mailto:support@milkboxstudio.com">support@milkboxstudio.com</a></p>
             </div>
           </div>
         </div>
@@ -319,7 +355,7 @@
   <footer id="footer">
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong>Artisan Resume Services</strong>. All Rights Reserved
+        &copy; Copyright <strong>Milkbox Studio</strong>. All Rights Reserved
       </div>
       <div class="credits">
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
